@@ -6,6 +6,8 @@ class Surah {
   final String revelationType;
   final int numberOfAyahs;
 
+  var ayahs;
+
   Surah({
     required this.number,
     required this.name,
