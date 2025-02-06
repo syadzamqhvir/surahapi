@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../services/api_service.dart';
+import 'package:surah_api/PostPage/surah_detail.dart';
+import 'package:surah_api/services/api_service.dart';
 import '../models/surah_model.dart';
+
 
 class SurahListScreen extends StatefulWidget {
   const SurahListScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _SurahListScreenState createState() => _SurahListScreenState();
 }
 
@@ -41,71 +42,93 @@ class _SurahListScreenState extends State<SurahListScreen> {
             itemCount: surahList.length,
             itemBuilder: (context, index) {
               final surah = surahList[index];
-              return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: const BoxDecoration(
-                          color: Colors.blue,
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          '${surah.number}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SurahDetailScreen(surah: surah),
+                    ),
+                  );
+                },
+                child: Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${surah.number}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              surah.name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                surah.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            const SizedBox(height: 5),
-                            Text(
-                              '${surah.numberOfAyahs} Ayat',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(height: 5),
+                              Text(
+                                '${surah.numberOfAyahs} Ayat',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'English Name: ${surah.englishName}',
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                            Text(
-                              'Translation: ${surah.englishNameTranslation}',
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                            Text(
-                              'Revelation Type: ${surah.revelationType}',
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                            
-                          ],
+                              Text(
+                                'English Name: ${surah.englishName}',
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                'Translation: ${surah.englishNameTranslation}',
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                'Revelation Type: ${surah.revelationType}',
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SurahDetailScreen(surah: surah),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Detail'),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );
